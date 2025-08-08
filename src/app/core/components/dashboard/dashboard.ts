@@ -105,10 +105,10 @@ export class Dashboard {
     const datas = localStorage.getItem('userFormList');
     let res = datas ? JSON.parse(datas) : [];
     if (this.userDetails.role === 'member') {
-      res = res.filter((task: any) => task.assignee === this.userDetails.email);
+      res = res.filter((task: TaskDetails) => task.assignee === this.userDetails.email);
     }
     if (this.userDetails.role === 'manager') {
-      res = res.filter((task: any) => task.assignee === this.userDetails.email);
+      res = res.filter((task: TaskDetails) => task.assignee === this.userDetails.email);
     }
     this.dataSource.data = res;
   }
