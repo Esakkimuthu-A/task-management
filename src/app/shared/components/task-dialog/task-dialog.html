@@ -1,0 +1,51 @@
+<h2 class="dialog-header">
+  <span class="dialog-title">{{ mode | titlecase }} Task</span>
+  <mat-icon class="icon-btn" mat-dialog-close matTooltip="Close">close</mat-icon>
+</h2>
+<form [formGroup]="taskForm" mat-dialog-content class="dialog-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Task Name</mat-label>
+    <input matInput formControlName="taskName" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Assignee</mat-label>
+    <mat-select formControlName="assignee">
+      @for (assignee of assigneeList; track assignee) {
+      <mat-option [value]="assignee">{{ assignee }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <div class="flex-row">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        @for (status of statusList; track status) {
+        <mat-option [value]="status.value">{{ status.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Due date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority">
+      @for (p of priorityList; track p) {
+      <mat-option [value]="p.value">{{ p.value }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" rows="2"></textarea>
+  </mat-form-field>
+  <div mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" (click)="submit()" [disabled]="taskForm.invalid">
+      Save
+    </button>
+  </div>
+</form>

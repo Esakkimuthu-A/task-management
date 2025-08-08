@@ -1,0 +1,60 @@
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .half-width {
+    width: 48%;
+  }
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px !important;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+}
+
+.dialog-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+// dialog changes
+.mat-mdc-dialog-actions {
+  padding: 0px !important;
+  margin-bottom: 10px;
+}
+
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 5px !important;
+}
+
+.icon-btn:hover {
+  cursor: pointer;
+}

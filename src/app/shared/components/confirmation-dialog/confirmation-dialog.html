@@ -1,0 +1,8 @@
+<h2 mat-dialog-title class="dialog-heading">{{data?.header}}</h2>
+<mat-dialog-content class="mat-typography" class="dialog-content">
+  <p>{{data?.content}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false" class="cancel-btn">No</button>
+  <button mat-button mat-flat-button color="primary" [mat-dialog-close]="true">Yes, Delete</button>
+</mat-dialog-actions>

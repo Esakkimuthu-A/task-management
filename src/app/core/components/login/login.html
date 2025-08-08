@@ -1,0 +1,36 @@
+<div class="login-container">
+  <div class="login-form">
+    <div class="form-box">
+      <h2>Log in</h2>
+      <p class="subtitle">Continue Enter your email</p>
+      <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="example@gmail.com" />
+          @if(loginForm.get('email')?.hasError('required')){
+          <mat-error>Email is required</mat-error>
+          }
+          @if(loginForm.get('email')?.hasError('pattern')){
+          <mat-error>Invalid email format</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="password" />
+          @if(loginForm.get('password')?.hasError('required')){
+          <mat-error>Password is required</mat-error>
+          }
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="full-width" (click)="onLogin()">Login</button>
+      </form>
+    </div>
+  </div>
+  <div class="login-quote">
+    <q>
+      Organize your work and find the way,<br />
+      Turn your ideas into action today.<br />
+      With every plan, you're bound to rise,<br />
+      Watch your success reach new skies.
+    </q>
+  </div>
+</div>

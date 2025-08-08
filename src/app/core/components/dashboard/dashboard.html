@@ -1,0 +1,119 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="user-info">
+      <img class="user-avatar" src="https://i.pravatar.cc/80?u={{userDetails.email}}" alt="User" />
+      <div class="user-details">
+        <p class="user-name">{{ userDetails.name }}</p>
+        <p class="user-email">{{ userDetails.email }}</p>
+        <button matButton="filled" (click)="logout()" class="logout-btn"><mat-icon>logout</mat-icon>Logout</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="task-wrapper">
+      @if(userDetails.role === 'owner'){
+      <div style="display: flex; align-items: flex-end; margin: 25px 0px;">
+        <button matButton="filled" class="create-button" (click)="createTask()"><mat-icon>add</mat-icon>Create
+          Task</button>
+      </div>
+      }
+      @if(dataSource.data.length>0){
+      <mat-card class="task-card">
+        <mat-card-title>Task details</mat-card-title>
+        <div class="table-container">
+          <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+            class="mat-elevation-z1">
+            <ng-container matColumnDef="taskName">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Task Name </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{ task.taskName }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="assignee">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Assignee </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{ task.assignee }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="priority">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Priority </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{ task.priority }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
+              <mat-cell *matCellDef="let task">
+                <span [ngClass]="getStatusClass(task.status)" class="status-label">
+                  {{ task.status }}
+                </span>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Due Date </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{ task.dueDate | date:'MMM d, y' }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="createdBy">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Created by </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{ task.createdBy }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="createdOn">
+              <mat-header-cell mat-sort-header *matHeaderCellDef> Created On </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{ task.createdOn | date:'MMM d, y' }} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columns" (click)="onRowClick(row)"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-card>
+      }
+      @else {
+      <div class="no-data-message">
+        <img src="/no-data.jpg" alt="No Data" />
+        <p>No data available</p>
+      </div>
+      }
+    </div>
+  </main>
+</div>
+
+<ng-template #view>
+  <div class="dialog-header">
+    <h2 class="headline">Task Details</h2>
+    <div class="header-icons">
+      <mat-icon class="icon-btn" matTooltip="Edit" (click)="editTask()">edit</mat-icon>
+      @if(userDetails.role !== 'member'){
+      <mat-icon class="icon-btn" matTooltip="Delete" (click)="onDeleteTask()">delete_outline</mat-icon>
+      }
+      <mat-icon class="icon-btn" mat-dialog-close matTooltip="Close">close</mat-icon>
+    </div>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <mat-dialog-content>
+    <div class="task-section">
+      <p class="task-label">Task Name</p>
+      <p class="task-value">{{ selectedTask.taskName }}</p>
+    </div>
+    <div class="task-section">
+      <p class="task-label">Assignee</p>
+      <span class="assignee-chip">{{ selectedTask.assignee }}</span>
+    </div>
+    <div class="task-info-grid">
+      <div>
+        <p class="task-label">Due Date</p>
+        <div class="task-date">
+          <mat-icon>date_range</mat-icon>
+          <span>{{ selectedTask.dueDate | date:'MMM d, y' }}</span>
+        </div>
+      </div>
+      <div>
+        <p class="task-label">Status</p>
+        <span [ngClass]="getStatusClass(selectedTask.status)" class="status-label">{{ selectedTask.status }}</span>
+      </div>
+      <div>
+        <p class="task-label">Priority</p>
+        <span>{{ selectedTask.priority }}</span>
+      </div>
+    </div>
+    <div class="task-section description-section">
+      <p class="task-label">Description</p>
+      <p class="task-description">{{ selectedTask.description || 'No description added' }}</p>
+    </div>
+  </mat-dialog-content>
+</ng-template>
