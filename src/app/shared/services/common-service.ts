@@ -63,4 +63,11 @@ export class CommonService {
   isLoggedIn(): boolean {
     return !!this.getUser();
   }
+
+  urlLogout(): void {
+    this.currentUser = null;
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('loggedUser');
+    }
+  }
 }
