@@ -85,6 +85,11 @@ mat-table {
     width: 100%;
 }
 
+mat-paginator{
+    min-width: 800px;
+    width: 100%;
+}
+
 mat-header-cell,
 mat-cell {
     padding: 8px 16px;
