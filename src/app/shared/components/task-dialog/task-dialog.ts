@@ -11,10 +11,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Priority, Status } from '../../constants/project.constant';
 import { TaskDetails, UserDetails } from '../../../core/models/user.models';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-task-dialog',
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatIconModule, CommonModule, MatTooltipModule],
   templateUrl: './task-dialog.html',
   styleUrl: './task-dialog.scss',
   providers: [
