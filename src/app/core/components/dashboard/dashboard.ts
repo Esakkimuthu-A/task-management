@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,7 +9,6 @@ import { TaskDetails, UserDetails } from '../../models/user.models';
 import { CommonService } from '../../../shared/services/common-service';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ChangeDetectorRef } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { Dialog } from '../../../shared/services/dialog';
@@ -111,13 +110,7 @@ export class Dashboard {
       res = res.filter((task: TaskDetails) => task.assignee === this.userDetails.email);
     }
     this.dataSource.data = res;
-  }
-
-  /**
-   * Logs out the current user and navigates to the login page
-   */
-  logout() {
-    this.commonService.logout()
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -188,6 +181,13 @@ export class Dashboard {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  /**
+   * Logs out the current user and navigates to the login page
+   */
+  logout() {
+    this.commonService.logout()
   }
 
   /**

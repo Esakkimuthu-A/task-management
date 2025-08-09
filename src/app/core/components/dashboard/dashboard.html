@@ -22,7 +22,7 @@
       <mat-card class="task-card">
         <mat-card-title>Task details</mat-card-title>
         <div class="table-container">
-          <mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+          <mat-table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
             class="mat-elevation-z1">
             <ng-container matColumnDef="taskName">
               <mat-header-cell mat-sort-header *matHeaderCellDef> Task Name </mat-header-cell>

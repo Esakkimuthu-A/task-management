@@ -11,7 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Priority, Status } from '../../constants/project.constant';
 import { TaskDetails, UserDetails } from '../../../core/models/user.models';
-import { CommonService } from '../../services/common-service';
 
 @Component({
   selector: 'app-task-dialog',
@@ -50,7 +49,7 @@ export class TaskDialog {
   /**
    * Injects dialog data, dialog reference, and common service
    */
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>, private commonService: CommonService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>) { }
 
   /**
    * Lifecycle hook - initializes the form with default or edit values
@@ -64,7 +63,7 @@ export class TaskDialog {
       status: new FormControl(this.data?.task?.status ?? null, Validators.required),
       dueDate: new FormControl(this.data?.task?.dueDate ?? null, Validators.required),
       priority: new FormControl(this.data?.task?.priority ?? null, Validators.required),
-      description: new FormControl(this.data?.task?.description ?? '')
+      description: new FormControl(this.data?.task?.description ?? null)
     });
   }
 
