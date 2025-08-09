@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CommonService } from '../../../shared/services/common-service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { CommonService } from '../../../shared/services/common-service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss'
@@ -25,6 +27,10 @@ export class Login {
    * Reactive form group for login form
    */
   loginForm !: FormGroup;
+  /**
+   * show invalid message 
+   */
+  invalid :boolean= false; 
   /**
    * Constructor to inject required services
    * @param router router Angular Router for navigation
@@ -55,8 +61,9 @@ export class Login {
     const success = this.commonService.login(email, password);
     if (success) {
       this.router.navigate(['/dashboard']);
+      this.invalid = false; 
     } else {
-      alert('Invalid credentials');
+      this.invalid = true;
     }
   }
 }

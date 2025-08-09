@@ -28,7 +28,7 @@
     }
 
     .subtitle {
-        margin-bottom: 2rem;
+        margin-bottom: 10px;
         color: #666;
         font-size: 0.95rem;
     }
@@ -76,4 +76,12 @@
 .mat-mdc-unelevated-button {
     background-color: var(--button-background-color) !important;
     font-size: 14px;
+}
+
+.invalid-error{
+    display: flex;
+    align-items: center;
+    color: red;
+    gap: 5px;
+    margin: 3px;
 }

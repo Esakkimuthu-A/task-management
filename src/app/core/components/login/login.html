@@ -3,7 +3,10 @@
     <div class="form-box">
       <h2>Log in</h2>
       <p class="subtitle">Continue Enter your email</p>
-      <form [formGroup]="loginForm">
+      @if(invalid){
+        <p class="invalid-error"><mat-icon>error_outline</mat-icon>Invalid login credentials, Please try again.</p>
+      }
+      <form [formGroup]="loginForm" style="margin-top: 10px;">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="email" placeholder="example@gmail.com" />
