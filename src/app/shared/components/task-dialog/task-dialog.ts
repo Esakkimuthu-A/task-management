@@ -103,8 +103,5 @@ export class TaskDialog {
         this.dialogRef.close(true);
       }
     }
-    else {
-      alert('Fill Form Details');
-    }
   }
 }
