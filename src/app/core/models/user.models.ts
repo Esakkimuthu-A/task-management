@@ -18,7 +18,7 @@ export interface TaskDetails {
 }
 
 export interface ConfirmationDialogData{
-    header: string,
-    content: string,
-    actionType: string,
+    header: string;
+    content: string;
+    actionType: string;
 }

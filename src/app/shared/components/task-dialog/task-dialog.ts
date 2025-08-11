@@ -50,7 +50,7 @@ export class TaskDialog {
   /**
    * Injects dialog data, dialog reference, and common service
    */
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<any>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<TaskDialog>) { }
 
   /**
    * Lifecycle hook - initializes the form with default or edit values
