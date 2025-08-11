@@ -89,7 +89,7 @@ export class TaskDialog {
         this.dialogRef.close(true);
       } else {
         const userId = existingData.length > 0
-          ? Math.max(...existingData.map((item: any) => item.id)) + 1
+          ? Math.max(...existingData.map((item: TaskDetails) => item.id)) + 1
           : 1;
         const dataToStore = {
           ...this.taskForm.value,
